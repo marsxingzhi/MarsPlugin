@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
@@ -8,7 +8,6 @@ android {
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-        applicationId "com.mars.framework.plugin"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -35,8 +34,6 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
-    implementation 'com.github.JohnnySwordMan:components:0.0.3'
-    implementation project(":mars")
+    implementation 'com.github.JohnnySwordMan:components:0.0.4'
 }
