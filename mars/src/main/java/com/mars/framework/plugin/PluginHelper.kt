@@ -20,7 +20,7 @@ private var sActivityThread: Any? = null
 fun getCurrentActivityThread(): Any {
     if (sActivityThread == null) {
         sActivityThread =
-            FieldUtils.readStaticField(Constants.CLS_NAME_ACTIVITY_THREAD, Constants.FIELD_NAME_CURRENT_ACTIVITY_THREAD)
+            FieldUtils.readStaticField(Constants.CLASS_NAME_ACTIVITY_THREAD, Constants.FIELD_NAME_CURRENT_ACTIVITY_THREAD)
     }
     return sActivityThread!!
 }

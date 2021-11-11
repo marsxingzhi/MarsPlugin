@@ -6,7 +6,7 @@ package com.mars.framework.plugin
 object Constants {
     const val EXTRA_TARGET_INTENT = "extra_target_intent"
     const val STUB_PACKAGE_NAME = "com.mars.framework.plugin"
-    const val CLS_NAME_ACTIVITY_THREAD = "android.app.ActivityThread"
+    const val CLASS_NAME_ACTIVITY_THREAD = "android.app.ActivityThread"
     const val FIELD_NAME_CURRENT_ACTIVITY_THREAD = "sCurrentActivityThread"
     const val FIELD_NAME_INSTRUMENTATION = "mInstrumentation"
     const val CLS_NAME_ACTIVITY_MANAGER_NATIVE = "android.app.ActivityManagerNative"

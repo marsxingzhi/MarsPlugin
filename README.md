@@ -1,9 +1,9 @@
 # MarsPlugin
-android plugin framework  
+android plugin framework
 
-基于《Android插件化开发指南》，实现一个最简单的Android插件化框架。
+# 概述
+从0到1实现一个插件框架，可以调起Activity、Service，也会处理资源问题
 
-
-- [x] 实现启动没有在宿主的AndroidManifest.xml中注册的Activity
-- [ ] 调用插件中的类或方法，修改原生的ClassLoader   
-- [ ] 合并资源
+# Activity
+- [ ] hook Instrumentation
+- [ ] 启动没有在宿主manifest文件中注册的Activity

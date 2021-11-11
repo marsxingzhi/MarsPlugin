@@ -14,7 +14,7 @@ class HostApplication : Application() {
         super.attachBaseContext(base)
 
         try {
-            Mars.startHook()
+            MarsManager.startHook()
         } catch (e: Exception) {
             e.printStackTrace()
         }
