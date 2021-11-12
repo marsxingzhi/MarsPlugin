@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.mars.components.util.reflect.FieldUtils;
 import com.mars.framework.plugin.Constants;
-import com.mars.framework.plugin.stub.StubActivity;
+import com.mars.framework.plugin.stub.StubStandardActivity0;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -55,7 +55,7 @@ public class MarsActivityManagerProxy implements InvocationHandler {
             Intent newIntent = new Intent();
 
             // 这里我们把启动的Activity临时替换为 StubActivity
-            ComponentName componentName = new ComponentName(Constants.STUB_PACKAGE_NAME, StubActivity.class.getName());
+            ComponentName componentName = new ComponentName(Constants.STUB_PACKAGE_NAME, StubStandardActivity0.class.getName());
             newIntent.setComponent(componentName);
             newIntent.putExtra(Constants.EXTRA_TARGET_INTENT, originIntent);
             args[idx] = newIntent;

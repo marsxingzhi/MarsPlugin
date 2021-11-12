@@ -3,7 +3,11 @@
     package="com.mars.framework.plugin">
 
     <application>
-        <activity android:name=".stub.StubActivity" />
+        <activity
+            android:name=".stub.StubStandardActivity0"
+            android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize"
+            android:exported="false"
+            android:theme="@style/ThemePlugin" />
     </application>
 
 </manifest>
