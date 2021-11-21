@@ -1,6 +1,7 @@
 package com.mars.framework.plugin.helper
 
 import com.mars.framework.plugin.Constants
+import com.mars.framework.plugin.reflect.MethodUtils
 import com.mars.framework.plugin.utils.MethodUtil
 
 /**
@@ -15,8 +16,8 @@ object PluginHelper {
             synchronized(PluginHelper::class.java) {
                 if (mActivityThread == null) {
                     val cls = Class.forName(Constants.CLASS_NAME_ACTIVITY_THREAD)
-                    mActivityThread =
-                        MethodUtil.invokeStaticMethod(cls, "currentActivityThread", null)
+//                    mActivityThread = MethodUtil.invokeStaticMethod(cls, "currentActivityThread", null)
+                    mActivityThread = MethodUtils.invokeStaticMethod(cls, "currentActivityThread")
                 }
             }
         }

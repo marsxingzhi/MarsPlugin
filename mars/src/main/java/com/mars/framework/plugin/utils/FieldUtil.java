@@ -80,7 +80,7 @@ public final class FieldUtil {
     @SuppressLint("RestrictedApi")
     private static Field getField(Class<?> cls, String fieldName) {
         Preconditions.checkNotNull(cls, "the class must not be null.");
-        if (!TextUtils.isEmpty(fieldName)) {
+        if (TextUtils.isEmpty(fieldName)) {
             throw new IllegalArgumentException("the field name must not be null.");
         }
         while (cls != null) {

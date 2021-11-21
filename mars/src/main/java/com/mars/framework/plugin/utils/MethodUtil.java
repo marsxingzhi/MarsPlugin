@@ -61,7 +61,7 @@ public final class MethodUtil {
         if (cls == null) {
             throw new IllegalArgumentException("the class must not be null.");
         }
-        if (!TextUtils.isEmpty(methodName)) {
+        if (TextUtils.isEmpty(methodName)) {
             throw new IllegalArgumentException("the method name must not be null.");
         }
         Method targetMethod = null;

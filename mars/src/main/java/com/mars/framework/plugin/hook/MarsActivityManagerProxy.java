@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 
-import com.mars.components.util.reflect.FieldUtils;
 import com.mars.framework.plugin.Constants;
+import com.mars.framework.plugin.reflect.FieldUtils;
 import com.mars.framework.plugin.stub.StubStandardActivity0;
 
 import java.lang.reflect.InvocationHandler;

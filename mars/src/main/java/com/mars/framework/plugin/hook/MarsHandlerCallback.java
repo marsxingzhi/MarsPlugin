@@ -6,9 +6,9 @@ import android.os.Message;
 
 import androidx.annotation.NonNull;
 
-import com.mars.components.util.reflect.FieldUtils;
 import com.mars.framework.plugin.Constants;
 import com.mars.framework.plugin.PluginHelperKt;
+import com.mars.framework.plugin.reflect.FieldUtils;
 
 /**
  * Created by geyan on 2021/2/12
