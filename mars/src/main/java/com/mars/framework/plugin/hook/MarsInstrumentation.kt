@@ -2,38 +2,49 @@ package com.mars.framework.plugin.hook
 
 import android.app.Activity
 import android.app.Instrumentation
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.IBinder
+import com.mars.framework.plugin.Constants
 import com.mars.framework.plugin.ext.log
 import com.mars.framework.plugin.helper.PluginHelper
+import com.mars.framework.plugin.stub.StubStandardActivity0
 import com.mars.framework.plugin.utils.FieldUtil
 import com.mars.framework.plugin.utils.MethodUtil
-import com.mars.framework.plugin.utils.OSUtil
 
 /**
  * Created by JohnnySwordMan on 2021/11/11
  */
-class MarsInstrumentation : Instrumentation(), IHook {
+class MarsInstrumentation() : Instrumentation() {
 
     companion object {
         const val TAG = "MarsInstrumentation"
+
+        /**
+         * 替换ActivityThread的mInstrumentation
+         */
+        fun onHook() {
+            val currentActivityThread = PluginHelper.getCurrentActivityThread()
+            val mInstrumentationField =
+                FieldUtil.readField(currentActivityThread, "mInstrumentation")
+            if (mInstrumentationField !is MarsInstrumentation) {
+//                mOrigin = mInstrumentationField as Instrumentation
+                FieldUtil.writeField(
+                    "mInstrumentation",
+                    currentActivityThread,
+                    MarsInstrumentation(mInstrumentationField as Instrumentation)
+                )
+                log(TAG, "hook success")
+            }
+        }
     }
 
     var mOrigin: Instrumentation? = null
 
-    /**
-     * 替换ActivityThread的mInstrumentation
-     */
-    override fun onHook() {
-        val currentActivityThread = PluginHelper.getCurrentActivityThread()
-        val mInstrumentationField = FieldUtil.readField(currentActivityThread, "mInstrumentation")
-        if (mInstrumentationField !is MarsInstrumentation) {
-            mOrigin = mInstrumentationField as Instrumentation
-            FieldUtil.writeField("mInstrumentation", currentActivityThread, this)
-            log(TAG, "hook success")
-        }
+    constructor(instrumentation: Instrumentation) : this() {
+        mOrigin = instrumentation
     }
 
     /**
@@ -76,13 +87,29 @@ class MarsInstrumentation : Instrumentation(), IHook {
             Int::class.java,
             Bundle::class.java
         )
-        val paramValues = arrayOf(who, contextThread, token, target, intent, requestCode, options)
+        val paramValues =
+            arrayOf(who, contextThread, token, target, wrapIntent(intent), requestCode, options)
         return MethodUtil.invokeMethod(
             mOrigin,
             "execStartActivity",
             paramTypes,
             paramValues
         ) as ActivityResult?
+    }
+
+    /**
+     * 替换原始的Intent
+     * TODO@geyan，这里还需要考虑启动模式，需要找到对应的Stub
+     */
+    private fun wrapIntent(intent: Intent?): Intent {
+        val newIntent = Intent()
+        // 包名是com.mars.framework.plugin，不是com.mars.framework.plugin.stub
+        val stubPackage = Constants.STUB_PACKAGE_NAME
+        // 将要启动的Activity替换成StubActivity
+        val componentName = ComponentName(stubPackage, StubStandardActivity0::class.java.name)
+        newIntent.component = componentName
+        newIntent.putExtra(Constants.EXTRA_TARGET_INTENT, intent)
+        return newIntent
     }
 
 }

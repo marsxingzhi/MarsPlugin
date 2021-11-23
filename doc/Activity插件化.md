@@ -23,3 +23,8 @@ Activity插件化主要需要解决以下几个问题：
 2. hook Instrumentation，而不是AMN，因为在Android8.0及其以上，AMN和AMP废弃了，如果hook AMN的话，需要考虑兼容问题
 3. hook mH的mCallback字段
 
+
+
+## 开发步骤
+
+- [ ] hook Instrumentation

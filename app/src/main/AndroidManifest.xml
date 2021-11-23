@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PluginTestActivity"/>
+<!--        <activity android:name=".PluginTestActivity"/>-->
 
     </application>
 

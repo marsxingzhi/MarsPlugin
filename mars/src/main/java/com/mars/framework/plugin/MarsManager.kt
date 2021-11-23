@@ -1,6 +1,9 @@
 package com.mars.framework.plugin
 
 import com.mars.framework.plugin.ext.log
+import com.mars.framework.plugin.hook.MarsHandlerCallback
+import com.mars.framework.plugin.hook.MarsHandlerCallback.onHook
+import com.mars.framework.plugin.hook.MarsHandlerCallbackV2
 import com.mars.framework.plugin.hook.MarsInstrumentation
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -18,8 +21,9 @@ object MarsManager {
 
     fun startHook() {
         if (startBoolean.compareAndSet(false, true)) {
-            MarsInstrumentation().onHook()
+            MarsInstrumentation.onHook()
 //            MarsActivityManagerProxy.onHook()
+            MarsHandlerCallbackV2.onHook()
 //            MarsHandlerCallback.onHook()
             log(TAG, "hook success")
         } else {
