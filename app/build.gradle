@@ -39,4 +39,5 @@ dependencies {
 
     implementation 'com.github.JohnnySwordMan:components:0.0.3'
     implementation project(":mars")
+    implementation project(":toolapi")
 }

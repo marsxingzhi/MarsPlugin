@@ -15,6 +15,8 @@ class MarsHandlerCallbackV2() : Handler.Callback {
 
     companion object {
 
+        const val TAG = "MarsHandlerCallbackV2"
+
         const val LAUNCH_ACTIVITY = 100
         // Android P去掉了100-109这10个用于Activity的消息，都改成了159
         const val EXECUTE_TRANSACTION = 159
@@ -56,7 +58,7 @@ class MarsHandlerCallbackV2() : Handler.Callback {
         when (msg.what) {
             LAUNCH_ACTIVITY -> handleLaunchActivity(msg)
             EXECUTE_TRANSACTION  -> {
-                Log.e("gy", "执行159")
+                Log.e(TAG, "执行159")
                 val mActivityCallbacks = FieldUtils.readField(msg.obj, "mActivityCallbacks") as List<Any>
                 val className = "android.app.servertransaction.LaunchActivityItem"
                 if (mActivityCallbacks.isNotEmpty()) {

@@ -1,3 +1,5 @@
+include ':toolapi'
+include ':tool'
 include ':mars'
 include ':app'
 rootProject.name = "MarsPlugin"

@@ -1,0 +1,59 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.0"
+
+    defaultConfig {
+        applicationId "com.mars.plugin.tool"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+//    resourcePrefix "tool_"
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+
+    // 宿主和插件共同依赖的最终打到宿主包
+    compileOnly project(":toolapi")
+}
+
+assemble.doLast {
+    android.applicationVariants.all { variant ->
+        if (variant.name == "release") {
+            variant.outputs.each { output ->
+                File originFile = output.outputFile
+                println "插件路径：${originFile.absolutePath}"
+
+                // 打包成功后，将apk拷贝到宿主的assets目录中
+                copy {
+                    from originFile
+                    into "$rootDir/app/src/main/assets"
+                    rename(originFile.name, "tool.apk")
+                }
+            }
+        }
+    }
+}
