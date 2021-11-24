@@ -12,7 +12,8 @@ class HostApplication : Application() {
 
     override fun attachBaseContext(context: Context?) {
         super.attachBaseContext(context)
-        DownloadApkHelper.mockDownloadPluginApk(context!!, "tool.apk")
+//        DownloadApkHelper.mockDownloadPluginApk(context!!, "tool.apk")
+        MarsManager.init(this)
         MarsManager.startHook()
         // 暂时先别加try-catch，尽可能暴露问题
 //        try {

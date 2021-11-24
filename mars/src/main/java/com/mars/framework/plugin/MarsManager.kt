@@ -1,5 +1,8 @@
 package com.mars.framework.plugin
 
+import android.app.Application
+import android.content.Context
+import com.mars.framework.plugin.classloader.MarsClassLoader
 import com.mars.framework.plugin.ext.log
 import com.mars.framework.plugin.hook.MarsHandlerCallback
 import com.mars.framework.plugin.hook.MarsHandlerCallback.onHook
@@ -15,12 +18,19 @@ import java.util.concurrent.atomic.AtomicBoolean
  */
 object MarsManager {
 
-    private const val TAG = "Mars"
+    private const val TAG = "MarsManager"
 
     private val startBoolean = AtomicBoolean(false)
 
+    private var mApp: Application? = null
+
+    fun init(app: Application) {
+        mApp = app
+    }
+
     fun startHook() {
         if (startBoolean.compareAndSet(false, true)) {
+            hookClassLoader()
             MarsInstrumentation.onHook()
 //            MarsActivityManagerProxy.onHook()
             MarsHandlerCallbackV2.onHook()
@@ -29,6 +39,10 @@ object MarsManager {
         } else {
             log(TAG, "has been hooked")
         }
+    }
+
+    fun hookClassLoader() {
+        MarsClassLoader.onHook(mApp)
     }
 
 }
