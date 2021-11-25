@@ -21,19 +21,29 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="20dp"
-		android:text="start PluginActivity"
+		android:text="启动没有在manifest中声明的Activity"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/tv_des" />
 
 	<Button
 		android:id="@+id/btn_invoke_plugin"
-		android:text="invoke uploadTask in Plugin"
+		android:text="调用插件中的方法"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="20dp"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/btn_start_plugin"/>
+
+	<Button
+		android:id="@+id/btn_start_record"
+		android:text="启动插件中的Activity"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="20dp"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/btn_invoke_plugin"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

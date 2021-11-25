@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MarsPlugin">
-        <activity android:name=".RecodeActivity">
+        <activity android:name=".RecordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

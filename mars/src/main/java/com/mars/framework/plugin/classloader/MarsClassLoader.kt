@@ -30,6 +30,7 @@ class MarsClassLoader(dexPath: String, parent: ClassLoader) : PathClassLoader(de
             val mBaseContext = app.baseContext
             // TODO 关注这个
             // ContextImpl中的LoadedApk对象中的mPackageInfo，传说中的命中缓存！
+            // mPackageInfo就是LoadedApk，LoadedApk对象是APK文件在内存中的表示
             val mPackageInfo = FieldUtils.readField(mBaseContext, "mPackageInfo")
             val marsClassLoader =
                 MarsClassLoader(mBaseContext.packageCodePath, mBaseContext.classLoader)
@@ -51,9 +52,8 @@ class MarsClassLoader(dexPath: String, parent: ClassLoader) : PathClassLoader(de
                     marsClassLoader.addPluginClassLoader(pluginDexClassLoader)
                 }
             }
-
             FieldUtils.writeField(mPackageInfo, "mClassLoader", marsClassLoader)
-            // TODO 为啥要设置这个
+            // 注意：不要忘记这个设置。线程上下文加载器，破坏双亲委派模型的。一般用于SPI，可以看ServiceLoader的load方法
             Thread.currentThread().contextClassLoader = marsClassLoader
         }
     }
